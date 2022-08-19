@@ -16,11 +16,5 @@ namespace SpawnCloud.ChatService.API.Controllers
             _logger = logger;
             _orleansClient = orleansClient;
         }
-
-        [HttpGet]
-        public async Task<IActionResult> ListChannels()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

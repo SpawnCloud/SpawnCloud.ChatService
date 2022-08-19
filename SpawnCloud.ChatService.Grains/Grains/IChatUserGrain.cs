@@ -1,7 +1,7 @@
 ﻿using Orleans;
-using SpawnCloud.ChatService.Shared.Contracts;
+using SpawnCloud.ChatService.Contracts.Models;
 
-namespace SpawnCloud.ChatService.Shared.Grains;
+namespace SpawnCloud.ChatService.Grains;
 
 public interface IChatUserGrain : IGrainWithGuidKey
 {

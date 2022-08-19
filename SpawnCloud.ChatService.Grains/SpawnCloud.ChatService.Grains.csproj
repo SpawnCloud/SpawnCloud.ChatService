@@ -14,4 +14,8 @@
       <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="3.6.5" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\SpawnCloud.ChatService.Contracts\SpawnCloud.ChatService.Contracts.csproj" />
+    </ItemGroup>
+
 </Project>

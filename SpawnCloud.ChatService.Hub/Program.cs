@@ -1,0 +1,36 @@
+using Serilog;
+using SpawnCloud.ChatService.Hub.Hubs;
+using SpawnCloud.ChatService.Web.Shared.Orleans;
+
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSignalR();
+builder.Host.UseSerilog((context, configuration) =>
+{
+    if (context.HostingEnvironment.IsDevelopment())
+    {
+        configuration.ReadFrom.Configuration(context.Configuration)
+            .Enrich.FromLogContext()
+            .WriteTo.Console();
+    }
+    else
+    {
+        // TODO: Determine which logging sink and configuration to use for production environments
+        throw new NotImplementedException();
+    }
+});
+builder.UseOrleans();
+
+var app = builder.Build();
+if (builder.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseHttpsRedirection();
+}
+app.UseSerilogRequestLogging();
+
+app.MapHub<ChatHub>("/hubs/chat");
+
+app.Run();

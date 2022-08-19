@@ -1,0 +1,7 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Server + Hub" type="CompoundRunConfigurationType">
+    <toRun name="SpawnCloud.ChatService.Hub" type="LaunchSettings" />
+    <toRun name="SpawnCloud.ChatService.Server" type="LaunchSettings" />
+    <method v="2" />
+  </configuration>
+</component>

@@ -1,6 +1,6 @@
 ﻿using Orleans;
-using SpawnCloud.ChatService.Shared.Contracts;
-using SpawnCloud.ChatService.Shared.Grains;
+using SpawnCloud.ChatService.Contracts.Models;
+using SpawnCloud.ChatService.Grains;
 
 namespace SpawnCloud.ChatService.Server.Grains;
 

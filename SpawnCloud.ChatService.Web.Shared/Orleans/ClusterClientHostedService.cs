@@ -1,9 +1,10 @@
-﻿using Orleans;
+﻿using Microsoft.Extensions.Hosting;
+using Orleans;
 using Orleans.Configuration;
 using Serilog;
-using SpawnCloud.ChatService.Shared;
+using SpawnCloud.ChatService.Grains;
 
-namespace SpawnCloud.ChatService.API.Orleans;
+namespace SpawnCloud.ChatService.Web.Shared.Orleans;
 
 public class ClusterClientHostedService : IHostedService
 {

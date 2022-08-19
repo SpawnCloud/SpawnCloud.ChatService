@@ -1,4 +1,4 @@
-﻿namespace SpawnCloud.ChatService.Shared.Contracts;
+﻿namespace SpawnCloud.ChatService.Contracts.Models;
 
 public record ChannelDescription
 {

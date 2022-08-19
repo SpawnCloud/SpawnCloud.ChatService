@@ -1,4 +1,4 @@
-﻿namespace SpawnCloud.ChatService.Shared;
+﻿namespace SpawnCloud.ChatService.Grains;
 
 public class OrleansConstants
 {

@@ -2,9 +2,23 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpawnCloud.ChatService.API", "SpawnCloud.ChatService.API\SpawnCloud.ChatService.API.csproj", "{1FC0A446-A269-4D77-B682-336E2DA0C1BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpawnCloud.ChatService.Shared", "SpawnCloud.ChatService.Shared\SpawnCloud.ChatService.Shared.csproj", "{12E62F21-17D6-4536-8868-F2F225DFC97C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpawnCloud.ChatService.Grains", "SpawnCloud.ChatService.Grains\SpawnCloud.ChatService.Grains.csproj", "{12E62F21-17D6-4536-8868-F2F225DFC97C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpawnCloud.ChatService.Server", "SpawnCloud.ChatService.Server\SpawnCloud.ChatService.Server.csproj", "{BB3ACCB1-91C3-4B1D-8B2A-E51D4816815B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpawnCloud.ChatService.Client", "SpawnCloud.ChatService.Client\SpawnCloud.ChatService.Client.csproj", "{9353D981-CCAD-4CF3-A3C1-E97051468E44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpawnCloud.ChatService.Hub", "SpawnCloud.ChatService.Hub\SpawnCloud.ChatService.Hub.csproj", "{14A99D9B-16DD-4AD7-962D-2BFE52D72367}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpawnCloud.ChatService.Web.Shared", "SpawnCloud.ChatService.Web.Shared\SpawnCloud.ChatService.Web.Shared.csproj", "{F8BEEAF1-D350-439C-9399-1D3795D196A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpawnCloud.ChatService.Contracts", "SpawnCloud.ChatService.Contracts\SpawnCloud.ChatService.Contracts.csproj", "{359ED1F4-5D5F-49F9-8D61-1D970D29425C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{8FECF700-358A-4E61-983E-1798AB56491E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{CF455985-51A3-4215-B566-24686E67D002}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{0FAD9CC2-EB45-4694-A71E-700D7C5347A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +38,30 @@ Global
 		{BB3ACCB1-91C3-4B1D-8B2A-E51D4816815B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB3ACCB1-91C3-4B1D-8B2A-E51D4816815B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB3ACCB1-91C3-4B1D-8B2A-E51D4816815B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9353D981-CCAD-4CF3-A3C1-E97051468E44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9353D981-CCAD-4CF3-A3C1-E97051468E44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9353D981-CCAD-4CF3-A3C1-E97051468E44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9353D981-CCAD-4CF3-A3C1-E97051468E44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A99D9B-16DD-4AD7-962D-2BFE52D72367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A99D9B-16DD-4AD7-962D-2BFE52D72367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A99D9B-16DD-4AD7-962D-2BFE52D72367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A99D9B-16DD-4AD7-962D-2BFE52D72367}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8BEEAF1-D350-439C-9399-1D3795D196A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8BEEAF1-D350-439C-9399-1D3795D196A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8BEEAF1-D350-439C-9399-1D3795D196A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8BEEAF1-D350-439C-9399-1D3795D196A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{359ED1F4-5D5F-49F9-8D61-1D970D29425C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{359ED1F4-5D5F-49F9-8D61-1D970D29425C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{359ED1F4-5D5F-49F9-8D61-1D970D29425C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{359ED1F4-5D5F-49F9-8D61-1D970D29425C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1FC0A446-A269-4D77-B682-336E2DA0C1BD} = {8FECF700-358A-4E61-983E-1798AB56491E}
+		{14A99D9B-16DD-4AD7-962D-2BFE52D72367} = {8FECF700-358A-4E61-983E-1798AB56491E}
+		{BB3ACCB1-91C3-4B1D-8B2A-E51D4816815B} = {8FECF700-358A-4E61-983E-1798AB56491E}
+		{9353D981-CCAD-4CF3-A3C1-E97051468E44} = {0FAD9CC2-EB45-4694-A71E-700D7C5347A0}
+		{359ED1F4-5D5F-49F9-8D61-1D970D29425C} = {CF455985-51A3-4215-B566-24686E67D002}
+		{12E62F21-17D6-4536-8868-F2F225DFC97C} = {CF455985-51A3-4215-B566-24686E67D002}
+		{F8BEEAF1-D350-439C-9399-1D3795D196A8} = {CF455985-51A3-4215-B566-24686E67D002}
 	EndGlobalSection
 EndGlobal

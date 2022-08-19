@@ -1,6 +1,9 @@
-﻿using Orleans;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Orleans;
 
-namespace SpawnCloud.ChatService.API.Orleans;
+namespace SpawnCloud.ChatService.Web.Shared.Orleans;
 
 public static class OrleansExtensions
 {

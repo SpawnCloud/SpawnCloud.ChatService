@@ -3,7 +3,7 @@ using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
 using Serilog;
-using SpawnCloud.ChatService.Shared;
+using SpawnCloud.ChatService.Grains;
 
 var host = Host.CreateDefaultBuilder(args)
     .UseSerilog((context, configuration) =>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Orleans;
 using Orleans.Configuration;
+using Orleans.Hosting;
 using Serilog;
 using SpawnCloud.ChatService.Grains;
 
@@ -21,7 +22,8 @@ public class ClusterClientHostedService : IHostedService
                 {
                     options.ClusterId = OrleansConstants.DevClusterId;
                     options.ServiceId = OrleansConstants.DevServiceId;
-                });
+                })
+                .AddSimpleMessageStreamProvider("chat");
         }
         else
         {

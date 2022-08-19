@@ -2,7 +2,7 @@
 
 public interface IChatHub
 {
-    Task SendMessage(Guid userId, string message);
+    Task SendMessage(Guid channelId, string message);
 
-    Task JoinChannel(Guid channelId);
+    Task<bool> JoinChannel(Guid channelId);
 }

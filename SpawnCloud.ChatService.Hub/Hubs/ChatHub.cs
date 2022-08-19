@@ -6,36 +6,49 @@ namespace SpawnCloud.ChatService.Hub.Hubs;
 public class ChatHub : Microsoft.AspNetCore.SignalR.Hub<IChatHubClient>, IChatHub
 {
     private readonly IClusterClient _orleansClient;
+    private readonly IChatObserver _chatObserver;
 
-    public ChatHub(IClusterClient orleansClient)
+    public ChatHub(IClusterClient orleansClient, IChatObserver chatObserver)
     {
         _orleansClient = orleansClient;
+        _chatObserver = chatObserver;
     }
     
     public override Task OnConnectedAsync()
     {
-        return base.OnConnectedAsync();
+        return Task.CompletedTask;
     }
 
     public override Task OnDisconnectedAsync(Exception? exception)
     {
-        return base.OnDisconnectedAsync(exception);
+        return Task.CompletedTask;
     }
 
-    public Task SendMessage(Guid userId, string message)
+    public async Task SendMessage(Guid channelId, string message)
     {
-        return Clients.All.ReceiveMessage(userId, message);
+        var userId = GetUserId();
+        var chatUserGrain = _orleansClient.GetGrain<IChatUserGrain>(userId);
+        await chatUserGrain.SendMessage(channelId, message);
     }
 
-    public async Task JoinChannel(Guid channelId)
+    public async Task<bool> JoinChannel(Guid channelId)
     {
-        var userId = Guid.Parse(Context.UserIdentifier ?? throw new InvalidOperationException());
-        var groupId = channelId.ToString("N");
+        var userId = GetUserId();
+        var groupId = GetGroupId(channelId);
 
         var chatUserGrain = _orleansClient.GetGrain<IChatUserGrain>(userId);
-        //var result = await chatUserGrain.JoinChannel(channelId);
+        var result = await chatUserGrain.JoinChannel(channelId);
+        if (result)
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, groupId);
+            await Clients.Group(groupId).UserJoinedChannel(channelId, userId);
+            await _chatObserver.SubscribeToChannel(channelId);
+        }
 
-        await Groups.AddToGroupAsync(Context.ConnectionId, groupId);
-        await Clients.Group(groupId).UserJoinedChannel(channelId, userId);
+        return result;
     }
+
+    private Guid GetUserId() => Guid.Parse(Context.UserIdentifier ?? throw new InvalidOperationException());
+    
+    private static string GetGroupId(Guid channelId) => channelId.ToString("N");
 }

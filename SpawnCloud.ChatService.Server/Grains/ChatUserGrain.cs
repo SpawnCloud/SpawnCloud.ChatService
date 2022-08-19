@@ -6,7 +6,7 @@ namespace SpawnCloud.ChatService.Server.Grains;
 
 public class ChatUserGrain : Grain, IChatUserGrain
 {
-    private readonly List<Guid> _channels = new();
+    private readonly HashSet<Guid> _channels = new();
     
     public async Task<ChannelDescription[]> ListChannels()
     {
@@ -18,5 +18,26 @@ public class ChatUserGrain : Grain, IChatUserGrain
             descriptions.Add(channelDescription);
         }
         return descriptions.ToArray();
+    }
+
+    public async Task<bool> JoinChannel(Guid channelId)
+    {
+        var channelGrain = GrainFactory.GetGrain<IChatChannelGrain>(channelId);
+        var result = await channelGrain.JoinChannel(this);
+        if (result)
+        {
+            _channels.Add(channelId);
+        }
+        
+        return result;
+    }
+
+    public async Task SendMessage(Guid channelId, string message)
+    {
+        if (!_channels.Contains(channelId))
+            throw new InvalidOperationException("Cannot send message to channel that user does not belong to.");
+        
+        var channelGrain = GrainFactory.GetGrain<IChatChannelGrain>(channelId);
+        await channelGrain.SendMessage(this, message);
     }
 }

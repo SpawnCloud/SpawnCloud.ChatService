@@ -1,4 +1,5 @@
 using Serilog;
+using SpawnCloud.ChatService.Hub;
 using SpawnCloud.ChatService.Hub.Hubs;
 using SpawnCloud.ChatService.Web.Shared.Orleans;
 
@@ -19,6 +20,9 @@ builder.Host.UseSerilog((context, configuration) =>
     }
 });
 builder.UseOrleans();
+
+builder.Services.AddSingleton<IHostedService, ObserverHostedService>();
+builder.Services.AddSingleton<IChatObserver>(sp => sp.GetRequiredService<ObserverHostedService>());
 
 var app = builder.Build();
 if (builder.Environment.IsDevelopment())

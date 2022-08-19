@@ -20,7 +20,7 @@ namespace SpawnCloud.ChatService.API.Controllers
         [HttpGet]
         public async Task<IActionResult> ListChannels()
         {
-            return Ok();
+            throw new NotImplementedException();
         }
     }
 }

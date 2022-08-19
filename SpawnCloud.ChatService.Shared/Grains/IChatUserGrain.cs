@@ -3,7 +3,7 @@ using SpawnCloud.ChatService.Shared.Contracts;
 
 namespace SpawnCloud.ChatService.Shared.Grains;
 
-public interface IChatChannelGrain : IGrainWithGuidKey
+public interface IChatUserGrain : IGrainWithGuidKey
 {
-    Task<ChannelDescription> GetDescription();
+    Task<ChannelDescription[]> ListChannels();
 }

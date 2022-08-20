@@ -1,4 +1,5 @@
 using Serilog;
+using SpawnCloud.Authentication.Client;
 using SpawnCloud.ChatService.Hub;
 using SpawnCloud.ChatService.Hub.Hubs;
 using SpawnCloud.ChatService.Web.Shared.Orleans;
@@ -24,6 +25,8 @@ builder.UseOrleans();
 builder.Services.AddSingleton<IHostedService, ObserverHostedService>();
 builder.Services.AddSingleton<IChatObserver>(sp => sp.GetRequiredService<ObserverHostedService>());
 
+builder.Services.AddSpawnCloudAuthClient();
+
 var app = builder.Build();
 if (builder.Environment.IsDevelopment())
 {
@@ -34,7 +37,8 @@ else
     app.UseHttpsRedirection();
 }
 app.UseSerilogRequestLogging();
-
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapHub<ChatHub>("/hubs/chat");
 
 app.Run();

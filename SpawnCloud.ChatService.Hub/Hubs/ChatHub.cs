@@ -1,8 +1,10 @@
-﻿using Orleans;
+﻿using Microsoft.AspNetCore.Authorization;
+using Orleans;
 using SpawnCloud.ChatService.Contracts.Interfaces;
 using SpawnCloud.ChatService.Grains;
 namespace SpawnCloud.ChatService.Hub.Hubs;
 
+[Authorize]
 public class ChatHub : Microsoft.AspNetCore.SignalR.Hub<IChatHubClient>, IChatHub
 {
     private readonly IClusterClient _orleansClient;

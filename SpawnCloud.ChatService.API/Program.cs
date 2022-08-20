@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Serilog;
+using SpawnCloud.Authentication.Client;
 using SpawnCloud.ChatService.Web.Shared.Orleans;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
+
+builder.Services.AddSpawnCloudAuthClient();
 
 builder.Host.UseSerilog((context, configuration) =>
 {
@@ -67,6 +70,8 @@ else
 app.UseApiVersioning();
 app.UseSerilogRequestLogging();
 app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

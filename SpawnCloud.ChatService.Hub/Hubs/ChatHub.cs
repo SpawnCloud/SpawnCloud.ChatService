@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using OpenIddict.Abstractions;
 using Orleans;
 using SpawnCloud.ChatService.Contracts.Interfaces;
 using SpawnCloud.ChatService.Grains;
@@ -50,7 +51,7 @@ public class ChatHub : Microsoft.AspNetCore.SignalR.Hub<IChatHubClient>, IChatHu
         return result;
     }
 
-    private Guid GetUserId() => Guid.Parse(Context.UserIdentifier ?? throw new InvalidOperationException());
+    private Guid GetUserId() => Guid.Parse(Context?.User?.GetClaim("sub") ?? throw new InvalidOperationException());
     
     private static string GetGroupId(Guid channelId) => channelId.ToString("N");
 }

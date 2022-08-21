@@ -1,11 +1,13 @@
 using Serilog;
-using SpawnCloud.Authentication.Client;
+using SpawnCloud.Authentication.Validation;
 using SpawnCloud.ChatService.Hub;
 using SpawnCloud.ChatService.Hub.Hubs;
 using SpawnCloud.ChatService.Web.Shared.Orleans;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddSignalR();
+builder.Host.AddSpawnCloudAuthValidation();
 builder.Host.UseSerilog((context, configuration) =>
 {
     if (context.HostingEnvironment.IsDevelopment())
@@ -22,10 +24,9 @@ builder.Host.UseSerilog((context, configuration) =>
 });
 builder.UseOrleans();
 
-builder.Services.AddSingleton<IHostedService, ObserverHostedService>();
+builder.Services.AddSingleton<ObserverHostedService>();
+builder.Services.AddSingleton<IHostedService>(sp => sp.GetRequiredService<ObserverHostedService>());
 builder.Services.AddSingleton<IChatObserver>(sp => sp.GetRequiredService<ObserverHostedService>());
-
-builder.Services.AddSpawnCloudAuthClient();
 
 var app = builder.Build();
 if (builder.Environment.IsDevelopment())

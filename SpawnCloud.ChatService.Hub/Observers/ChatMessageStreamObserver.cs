@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Orleans.Streams;
 using SpawnCloud.ChatService.Contracts.Interfaces;
-using SpawnCloud.ChatService.Grains.Models;
+using SpawnCloud.ChatService.Contracts.Models;
 using SpawnCloud.ChatService.Hub.Hubs;
 
 namespace SpawnCloud.ChatService.Hub.Observers;
@@ -17,12 +17,12 @@ public class ChatMessageStreamObserver : IAsyncObserver<ChatMessage>
         _serviceProvider = serviceProvider;
     }
     
-    public async Task OnNextAsync(ChatMessage item, StreamSequenceToken? token = null)
+    public async Task OnNextAsync(ChatMessage chatMessage, StreamSequenceToken? token = null)
     {
         var scope = _serviceProvider.CreateAsyncScope();
         var hubContext = scope.ServiceProvider.GetRequiredService<IHubContext<ChatHub, IChatHubClient>>();
 
-        await hubContext.Clients.Group(_channelId.ToString("N")).ReceiveMessage(item.UserId, item.Message);
+        await hubContext.Clients.Group(_channelId.ToString("N")).ReceiveMessage(chatMessage);
         
         await scope.DisposeAsync();
     }

@@ -2,6 +2,7 @@
 using OpenIddict.Abstractions;
 using Orleans;
 using SpawnCloud.ChatService.Contracts.Interfaces;
+using SpawnCloud.ChatService.Contracts.Models;
 using SpawnCloud.ChatService.Grains;
 namespace SpawnCloud.ChatService.Hub.Hubs;
 
@@ -27,11 +28,11 @@ public class ChatHub : Microsoft.AspNetCore.SignalR.Hub<IChatHubClient>, IChatHu
         return Task.CompletedTask;
     }
 
-    public async Task SendMessage(Guid channelId, string message)
+    public async Task SendMessage(ChatMessage message)
     {
         var userId = GetUserId();
         var chatUserGrain = _orleansClient.GetGrain<IChatUserGrain>(userId);
-        await chatUserGrain.SendMessage(channelId, message);
+        await chatUserGrain.SendMessage(message);
     }
 
     public async Task<bool> JoinChannel(Guid channelId)

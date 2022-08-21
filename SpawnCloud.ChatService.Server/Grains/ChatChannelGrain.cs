@@ -3,7 +3,6 @@ using Orleans;
 using Orleans.Streams;
 using SpawnCloud.ChatService.Contracts.Models;
 using SpawnCloud.ChatService.Grains;
-using SpawnCloud.ChatService.Grains.Models;
 
 namespace SpawnCloud.ChatService.Server.Grains;
 
@@ -12,6 +11,7 @@ public class ChatChannelGrain : Grain, IChatChannelGrain
     private readonly ILogger<ChatChannelGrain> _logger;
     private readonly HashSet<Guid> _users = new();
     private IAsyncStream<ChatMessage> _stream = null!;
+    private readonly Dictionary<Guid, ChatMessage> _messages = new();
 
     public Guid ChannelId => this.GetPrimaryKey();
 
@@ -38,15 +38,13 @@ public class ChatChannelGrain : Grain, IChatChannelGrain
         });
     }
 
-    public async Task SendMessage(IChatUserGrain chatUserGrain, string message)
+    public async Task SendMessage(IChatUserGrain chatUserGrain, ChatMessage message)
     {
-        var userId = chatUserGrain.GetPrimaryKey();
-
-        await _stream.OnNextAsync(new ChatMessage
+        if (!_messages.ContainsKey(message.Id))
         {
-            UserId = userId,
-            Message = message
-        });
+            _messages.Add(message.Id, message);
+            await _stream.OnNextAsync(message);
+        }
     }
 
     public Task<bool> JoinChannel(IChatUserGrain chatUserGrain)

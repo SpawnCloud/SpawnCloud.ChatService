@@ -1,5 +1,5 @@
 ﻿using Orleans;
-using SpawnCloud.ChatService.Grains.Models;
+using SpawnCloud.ChatService.Contracts.Models;
 using SpawnCloud.ChatService.Hub.Observers;
 
 namespace SpawnCloud.ChatService.Hub;

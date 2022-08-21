@@ -8,6 +8,8 @@ public class ChatUserGrain : Grain, IChatUserGrain
 {
     private readonly HashSet<Guid> _channels = new();
     
+    public Guid UserId => this.GetPrimaryKey();
+    
     public async Task<ChannelDescription[]> ListChannels()
     {
         var descriptions = new List<ChannelDescription>();
@@ -31,13 +33,15 @@ public class ChatUserGrain : Grain, IChatUserGrain
         
         return result;
     }
-
-    public async Task SendMessage(Guid channelId, string message)
+    public async Task SendMessage(ChatMessage message)
     {
-        if (!_channels.Contains(channelId))
+        if (!_channels.Contains(message.ChannelId))
             throw new InvalidOperationException("Cannot send message to channel that user does not belong to.");
+
+        message.SenderUserId = UserId;
+        message.SendDate = DateTime.UtcNow;
         
-        var channelGrain = GrainFactory.GetGrain<IChatChannelGrain>(channelId);
+        var channelGrain = GrainFactory.GetGrain<IChatChannelGrain>(message.ChannelId);
         await channelGrain.SendMessage(this, message);
     }
 }

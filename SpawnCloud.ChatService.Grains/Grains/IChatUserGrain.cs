@@ -9,5 +9,5 @@ public interface IChatUserGrain : IGrainWithGuidKey
 
     Task<bool> JoinChannel(Guid channelId);
 
-    Task SendMessage(Guid channelId, string message);
+    Task SendMessage(ChatMessage message);
 }

@@ -7,7 +7,7 @@ public interface IChatChannelGrain : IGrainWithGuidKey
 {
     Task<ChannelDescription> GetDescription();
 
-    Task SendMessage(IChatUserGrain chatUserGrain, string message);
+    Task SendMessage(IChatUserGrain chatUserGrain, ChatMessage message);
 
     Task<bool> JoinChannel(IChatUserGrain chatUserGrain);
 }

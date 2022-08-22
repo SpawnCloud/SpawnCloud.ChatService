@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Orleans;
 
-namespace SpawnCloud.ChatService.Web.Shared.Orleans;
+namespace SpawnCloud.ChatService.API.Orleans;
 
 public static class OrleansExtensions
 {

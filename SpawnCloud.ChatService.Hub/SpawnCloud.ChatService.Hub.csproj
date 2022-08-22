@@ -9,14 +9,17 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.Orleans.Client" Version="3.6.5" />
       <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="3.6.5" />
+      <PackageReference Include="Microsoft.Orleans.Server" Version="3.6.5" />
       <PackageReference Include="Serilog" Version="2.11.0" />
       <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
       <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
       <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
       <PackageReference Include="SpawnCloud.Authentication.Validation" Version="0.0.0-alpha.0.5" />
+      <PackageReference Include="SpawnCloud.SignalR.Orleans" Version="2.2.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\SpawnCloud.ChatService.Hubs\SpawnCloud.ChatService.Hubs.csproj" />
       <ProjectReference Include="..\SpawnCloud.ChatService.Web.Shared\SpawnCloud.ChatService.Web.Shared.csproj" />
     </ItemGroup>
 

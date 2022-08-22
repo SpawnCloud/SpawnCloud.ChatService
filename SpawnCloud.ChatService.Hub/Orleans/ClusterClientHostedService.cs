@@ -5,7 +5,7 @@ using Orleans.Hosting;
 using Serilog;
 using SpawnCloud.ChatService.Grains;
 
-namespace SpawnCloud.ChatService.Web.Shared.Orleans;
+namespace SpawnCloud.ChatService.Hub.Orleans;
 
 public class ClusterClientHostedService : IHostedService
 {
@@ -32,6 +32,8 @@ public class ClusterClientHostedService : IHostedService
         }
 
         builder.ConfigureLogging(logging => logging.AddSerilog());
+        builder.ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IChatUserGrain).Assembly).WithReferences());
+        builder.UseSignalR();
         Client = builder.Build();
     }
     

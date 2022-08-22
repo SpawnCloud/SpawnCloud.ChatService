@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\SpawnCloud.ChatService.Grains\SpawnCloud.ChatService.Grains.csproj" />
+      <ProjectReference Include="..\SpawnCloud.ChatService.Hub\SpawnCloud.ChatService.Hub.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -25,6 +26,7 @@
       <PackageReference Include="Serilog.Extensions" Version="2.0.1" />
       <PackageReference Include="Serilog.Extensions.Hosting" Version="5.0.1" />
       <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
+      <PackageReference Include="SpawnCloud.SignalR.Orleans" Version="2.2.0" />
     </ItemGroup>
 
 </Project>

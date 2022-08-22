@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Serilog;
 using SpawnCloud.Authentication.Validation;
-using SpawnCloud.ChatService.Web.Shared.Orleans;
+using SpawnCloud.ChatService.API.Orleans;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApiVersioning(options =>

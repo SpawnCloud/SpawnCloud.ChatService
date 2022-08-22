@@ -46,7 +46,7 @@ namespace SpawnCloud.ChatService.API.Controllers
             await chatChannelGrain.InitializeChannel(channelSettings);
             var newChannelDescription = await chatChannelGrain.GetDescription();
 
-            return CreatedAtAction("CreateChannel", new { channelId = channelId }, newChannelDescription);
+            return CreatedAtAction("GetChannel", new { channelId = channelId }, newChannelDescription);
         }
     }
 }

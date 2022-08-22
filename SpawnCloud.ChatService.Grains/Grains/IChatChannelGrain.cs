@@ -5,9 +5,13 @@ namespace SpawnCloud.ChatService.Grains;
 
 public interface IChatChannelGrain : IGrainWithGuidKey
 {
+    Task InitializeChannel(ChannelSettings settings);
+    
     Task<ChannelDescription> GetDescription();
-
-    Task SendMessage(IChatUserGrain chatUserGrain, ChatMessage message);
-
+    
     Task<bool> JoinChannel(IChatUserGrain chatUserGrain);
+
+    Task LeaveChannel(IChatUserGrain chatUserGrain);
+    
+    Task SendMessage(IChatUserGrain chatUserGrain, ChatMessage message);
 }

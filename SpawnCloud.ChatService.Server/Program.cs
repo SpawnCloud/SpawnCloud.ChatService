@@ -57,6 +57,7 @@ var host = Host.CreateDefaultBuilder(args)
                     options.ClusterId = OrleansConstants.DevClusterId;
                     options.ServiceId = OrleansConstants.DevServiceId;
                 })
+                .AddMemoryGrainStorage(ChatChannelState.PersistenceStoreName)
                 .UseDashboard(options =>
                 {
                     options.Port = 8787;

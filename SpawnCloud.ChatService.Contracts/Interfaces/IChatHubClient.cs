@@ -7,4 +7,6 @@ public interface IChatHubClient
     Task ReceiveMessage(ChatMessage message);
 
     Task UserJoinedChannel(Guid channelId, Guid userId);
+
+    Task UserLeftChannel(Guid channelId, Guid userId);
 }

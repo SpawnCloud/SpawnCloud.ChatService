@@ -33,6 +33,17 @@ public class ChatUserGrain : Grain, IChatUserGrain
         
         return result;
     }
+
+    public async Task LeaveChannel(Guid channelId)
+    {
+        if (_channels.Contains(channelId))
+        {
+            var channelGrain = GrainFactory.GetGrain<IChatChannelGrain>(channelId);
+            await channelGrain.LeaveChannel(this);
+            _channels.Remove(channelId);
+        }
+    }
+
     public async Task SendMessage(ChatMessage message)
     {
         if (!_channels.Contains(message.ChannelId))

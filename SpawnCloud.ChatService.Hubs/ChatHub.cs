@@ -37,10 +37,16 @@ public class ChatHub : Hub<IChatHubClient>, IChatHub
     public async Task<bool> JoinChannel(Guid channelId)
     {
         var userId = GetUserId();
-
         var chatUserGrain = _grainFactory.GetGrain<IChatUserGrain>(userId);
         var result = await chatUserGrain.JoinChannel(channelId);
         return result;
+    }
+
+    public async Task LeaveChannel(Guid channelId)
+    {
+        var userId = GetUserId();
+        var chatUserGrain = _grainFactory.GetGrain<IChatUserGrain>(userId);
+        await chatUserGrain.LeaveChannel(channelId);
     }
 
     private Guid GetUserId() => Guid.Parse(Context.UserIdentifier ?? throw new InvalidOperationException());

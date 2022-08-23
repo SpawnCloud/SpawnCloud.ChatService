@@ -11,7 +11,7 @@ using SpawnCloud.ChatService.Server.Grains;
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
-        services.AddSignalR().AddOrleans();
+        services.AddSignalRCore().AddOrleans();
     })
     .UseSerilog((context, configuration) =>
     {

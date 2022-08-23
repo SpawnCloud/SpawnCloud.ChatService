@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Orleans;
 using SpawnCloud.ChatService.Contracts.Exceptions;
 using SpawnCloud.ChatService.Contracts.Models;

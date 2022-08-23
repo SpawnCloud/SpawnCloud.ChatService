@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-using Orleans;
+﻿using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
 using Serilog;

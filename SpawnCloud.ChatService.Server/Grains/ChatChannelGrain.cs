@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR.Protocol;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Orleans;
-using Orleans.Concurrency;
 using Orleans.Runtime;
 using SignalR.Orleans.Core;
 using SpawnCloud.ChatService.Contracts.Exceptions;
@@ -131,15 +129,7 @@ public class ChatChannelGrain : Grain, IChatChannelGrain
     
     private async Task SendToAllUsers(string methodName, params object?[] args)
     {
-        var users = _channelState.State.Users;
-        var tasks = new Task[users.Count];
-        var i = 0;
-        var message = new InvocationMessage(methodName, args).AsImmutable<InvocationMessage>();
-        foreach (var user in users)
-        {
-            var hubUserGrain = _hubContext.User(user.ToString());
-            tasks[i++] = hubUserGrain.Send(message);
-        }
-        await Task.WhenAll(tasks);
+        var users = _channelState.State.Users.Select(id => id.ToString()).ToArray();
+        await _hubContext.SendToUsers(users, methodName, args);
     }
 }

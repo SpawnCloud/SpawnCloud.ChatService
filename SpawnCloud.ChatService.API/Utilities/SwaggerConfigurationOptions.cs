@@ -5,7 +5,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace SpawnCloud.ChatService.API.Utilities;
 
-public class SwaggerConfigurationOptions : IConfigureNamedOptions<SwaggerGenOptions>
+internal class SwaggerConfigurationOptions : IConfigureNamedOptions<SwaggerGenOptions>
 {
     private readonly IApiVersionDescriptionProvider _apiVersionDescriptionProvider;
 

@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\SpawnCloud.ChatService.Grains\SpawnCloud.ChatService.Grains.csproj" />
-      <ProjectReference Include="..\SpawnCloud.ChatService.Web.Shared\SpawnCloud.ChatService.Web.Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>

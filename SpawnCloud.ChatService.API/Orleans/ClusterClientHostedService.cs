@@ -6,7 +6,7 @@ using SpawnCloud.ChatService.Grains;
 
 namespace SpawnCloud.ChatService.API.Orleans;
 
-public class ClusterClientHostedService : IHostedService
+internal class ClusterClientHostedService : IHostedService
 {
     public IClusterClient Client { get; }
 

@@ -2,7 +2,7 @@
 
 namespace SpawnCloud.ChatService.Hub.Orleans;
 
-public static class OrleansExtensions
+internal static class OrleansExtensions
 {
     public static WebApplicationBuilder UseOrleans(this WebApplicationBuilder builder)
     {

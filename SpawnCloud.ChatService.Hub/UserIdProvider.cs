@@ -3,7 +3,7 @@ using OpenIddict.Abstractions;
 
 namespace SpawnCloud.ChatService.Hub;
 
-public class UserIdProvider : IUserIdProvider
+internal class UserIdProvider : IUserIdProvider
 {
     public string? GetUserId(HubConnectionContext connection)
     {

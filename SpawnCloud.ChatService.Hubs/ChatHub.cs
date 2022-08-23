@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 using Orleans;
 using SpawnCloud.ChatService.Contracts.Interfaces;
 using SpawnCloud.ChatService.Contracts.Models;
@@ -38,8 +39,7 @@ public class ChatHub : Hub<IChatHubClient>, IChatHub
     {
         var userId = GetUserId();
         var chatUserGrain = _grainFactory.GetGrain<IChatUserGrain>(userId);
-        var result = await chatUserGrain.JoinChannel(channelId);
-        return result;
+        return await chatUserGrain.JoinChannel(channelId);
     }
 
     public async Task LeaveChannel(Guid channelId)

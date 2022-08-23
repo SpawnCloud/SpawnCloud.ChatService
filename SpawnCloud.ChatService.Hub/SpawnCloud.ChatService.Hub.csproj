@@ -20,7 +20,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\SpawnCloud.ChatService.Hubs\SpawnCloud.ChatService.Hubs.csproj" />
-      <ProjectReference Include="..\SpawnCloud.ChatService.Web.Shared\SpawnCloud.ChatService.Web.Shared.csproj" />
     </ItemGroup>
 
 </Project>

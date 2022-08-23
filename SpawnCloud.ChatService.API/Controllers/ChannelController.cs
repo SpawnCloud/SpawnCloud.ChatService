@@ -11,7 +11,7 @@ namespace SpawnCloud.ChatService.API.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class ChannelController : ControllerBase
+    internal class ChannelController : ControllerBase
     {
         private readonly ILogger<ChannelController> _logger;
         private readonly IClusterClient _orleansClient;
@@ -22,6 +22,23 @@ namespace SpawnCloud.ChatService.API.Controllers
             _orleansClient = orleansClient;
         }
 
+        /// <summary>
+        /// Create a new channel
+        /// </summary>
+        [HttpPut]
+        public async Task<IActionResult> CreateChannel([FromBody] ChannelSettings channelSettings)
+        {
+            var channelId = Guid.NewGuid();
+            var chatChannelGrain = _orleansClient.GetGrain<IChatChannelGrain>(channelId);
+            await chatChannelGrain.InitializeChannel(channelSettings);
+            var newChannelDescription = await chatChannelGrain.GetDescription();
+
+            return CreatedAtAction("GetChannel", new { channelId = channelId }, newChannelDescription);
+        }
+
+        /// <summary>
+        /// Get a channel's summary
+        /// </summary>
         [HttpGet("{channelId}")]
         public async Task<IActionResult> GetChannel(Guid channelId)
         {
@@ -35,17 +52,6 @@ namespace SpawnCloud.ChatService.API.Controllers
             {
                 return NotFound();
             }
-        }
-        
-        [HttpPut]
-        public async Task<IActionResult> CreateChannel([FromBody] ChannelSettings channelSettings)
-        {
-            var channelId = Guid.NewGuid();
-            var chatChannelGrain = _orleansClient.GetGrain<IChatChannelGrain>(channelId);
-            await chatChannelGrain.InitializeChannel(channelSettings);
-            var newChannelDescription = await chatChannelGrain.GetDescription();
-
-            return CreatedAtAction("GetChannel", new { channelId = channelId }, newChannelDescription);
         }
     }
 }

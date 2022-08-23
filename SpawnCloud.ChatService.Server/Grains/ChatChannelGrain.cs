@@ -11,10 +11,9 @@ using SpawnCloud.ChatService.Hubs;
 namespace SpawnCloud.ChatService.Server.Grains;
 
 [Serializable]
-public class ChatChannelState
+internal class ChatChannelState
 {
     public const string PersistenceStateName = "ChatChannel";
-    public const string PersistenceStoreName = "ChatChannelStore";
     
     public bool IsCreated { get; set; }
     public string Name { get; set; } = string.Empty;
@@ -22,7 +21,7 @@ public class ChatChannelState
     public Dictionary<Guid, ChatMessage> Messages { get; set; } = new();
 }
 
-public class ChatChannelGrain : Grain, IChatChannelGrain
+internal class ChatChannelGrain : Grain, IChatChannelGrain
 {
     private readonly ILogger<ChatChannelGrain> _logger;
     private HubContext<ChatHub> _hubContext = null!;
@@ -32,7 +31,8 @@ public class ChatChannelGrain : Grain, IChatChannelGrain
     public Guid ChannelId => this.GetPrimaryKey();
 
     public ChatChannelGrain(ILogger<ChatChannelGrain> logger,
-        [PersistentState(ChatChannelState.PersistenceStateName, ChatChannelState.PersistenceStoreName)] IPersistentState<ChatChannelState> state)
+        [PersistentState(ChatChannelState.PersistenceStateName, Constants.ChatGrainStorage)]
+        IPersistentState<ChatChannelState> state)
     {
         _logger = logger;
         _channelState = state;

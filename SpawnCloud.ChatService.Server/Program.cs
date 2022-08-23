@@ -6,6 +6,7 @@ using Orleans.Hosting;
 using Serilog;
 using SpawnCloud.ChatService.Grains;
 using SpawnCloud.ChatService.Hubs;
+using SpawnCloud.ChatService.Server;
 using SpawnCloud.ChatService.Server.Grains;
 
 var host = Host.CreateDefaultBuilder(args)
@@ -57,7 +58,7 @@ var host = Host.CreateDefaultBuilder(args)
                     options.ClusterId = OrleansConstants.DevClusterId;
                     options.ServiceId = OrleansConstants.DevServiceId;
                 })
-                .AddMemoryGrainStorage(ChatChannelState.PersistenceStoreName)
+                .AddMemoryGrainStorage(Constants.ChatGrainStorage)
                 .UseDashboard(options =>
                 {
                     options.Port = 8787;

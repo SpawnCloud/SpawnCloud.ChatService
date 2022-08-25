@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Orleans.Hosting;
 using Serilog;
@@ -5,10 +6,20 @@ using SpawnCloud.Authentication.Validation;
 using SpawnCloud.ChatService.Hub;
 using SpawnCloud.ChatService.Hub.Orleans;
 using SpawnCloud.ChatService.Hubs;
+using SpawnCloud.Shared.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.AddSpawnCloudAuthValidation();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ChatPolicy", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireScope("user.chat");
+    });
+});
+builder.Services.AddSpawnCloudAuthorizationHandlers();
 builder.Host.UseSerilog((context, configuration) =>
 {
     if (context.HostingEnvironment.IsDevelopment())

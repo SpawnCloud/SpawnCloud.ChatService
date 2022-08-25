@@ -7,7 +7,7 @@ using SpawnCloud.ChatService.Grains;
 
 namespace SpawnCloud.ChatService.API.Controllers
 {
-    [Authorize]
+    [Authorize("ChatPolicy")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
     [ApiController]

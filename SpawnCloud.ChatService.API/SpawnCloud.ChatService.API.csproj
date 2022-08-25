@@ -20,6 +20,7 @@
       <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
       <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
       <PackageReference Include="SpawnCloud.Authentication.Validation" Version="0.0.0-alpha.0.5" />
+      <PackageReference Include="SpawnCloud.Shared.Web" Version="0.0.0-alpha.0.3" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 

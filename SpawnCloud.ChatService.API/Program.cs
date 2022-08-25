@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Serilog;
 using SpawnCloud.Authentication.Validation;
 using SpawnCloud.ChatService.API.Orleans;
+using SpawnCloud.Shared.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApiVersioning(options =>
@@ -26,6 +27,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 builder.Host.AddSpawnCloudAuthValidation();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ChatPolicy", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireScope("user.chat");
+    });
+});
+builder.Services.AddSpawnCloudAuthorizationHandlers();
 
 builder.Host.UseSerilog((context, configuration) =>
 {

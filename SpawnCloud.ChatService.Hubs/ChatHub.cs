@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Logging;
 using Orleans;
 using SpawnCloud.ChatService.Contracts.Interfaces;
 using SpawnCloud.ChatService.Contracts.Models;
@@ -8,7 +7,7 @@ using SpawnCloud.ChatService.Grains;
 
 namespace SpawnCloud.ChatService.Hubs;
 
-[Authorize]
+[Authorize("ChatPolicy")]
 public class ChatHub : Hub<IChatHubClient>, IChatHub
 {
     private readonly IGrainFactory _grainFactory;
@@ -34,7 +33,7 @@ public class ChatHub : Hub<IChatHubClient>, IChatHub
         var chatUserGrain = _grainFactory.GetGrain<IChatUserGrain>(userId);
         await chatUserGrain.SendMessage(message);
     }
-
+    
     public async Task<bool> JoinChannel(Guid channelId)
     {
         var userId = GetUserId();
